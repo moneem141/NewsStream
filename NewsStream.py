@@ -62,7 +62,7 @@ def on_mouse_wheel(event):
 
 # Tkinter setup
 root = tk.Tk()
-root.title("NewsStreamBD")
+root.title("NewsStream")
 root.geometry("600x400")
 
 # Creating a scrollable frame
