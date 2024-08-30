@@ -1,3 +1,17 @@
+import subprocess
+import sys
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+required_packages = ["requests", "beautifulsoup4", "tkinter"]
+
+for package in required_packages:
+    try:
+        __import__(package)
+    except ImportError:
+        install(package)
+
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
@@ -24,7 +38,7 @@ selectors = {
 def fetch_headlines(url, tags):
     try:
         response = requests.get(url)
-        response.raise_for_status()  # Check if the request was successful
+        response.raise_for_status() 
         soup = BeautifulSoup(response.text, 'html.parser')
 
         headlines = soup.find_all(tags)
@@ -45,7 +59,7 @@ def open_link(url):
 
 def display_headlines():
     for widget in frame.winfo_children():
-        widget.destroy()  # Clear previous content
+        widget.destroy()
 
     for site, url in urls.items():
         ttk.Label(frame, text=f"Headlines from {site}:", font=('Poppins', 14, 'bold')).pack(anchor='w', pady=5)
